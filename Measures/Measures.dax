@@ -1,0 +1,23 @@
+Attrition Count =
+CALCULATE(
+    COUNTROWS(FactAttrition),
+    FactAttrition[attrition] = "Yes"
+)
+
+Headcount = COUNTROWS(DimEmployee)
+
+Attrition Rate = DIVIDE([Attrition Count], [Headcount])
+
+Avg Monthly Income = AVERAGE(FactAttrition[monthly_income])
+
+Attrition by Department =
+CALCULATE(
+    [Attrition Count],
+    ALLEXCEPT(DimEmployee, DimEmployee[department])
+)
+
+Attrition by Manager =
+CALCULATE(
+    [Attrition Count],
+    ALLEXCEPT(DimManager, DimManager[manager_email])
+)

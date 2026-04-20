@@ -1,0 +1,32 @@
+Summary_Department =
+SUMMARIZE(
+    FactAttrition,
+    DimEmployee[department],
+    "AttritionCount",
+        CALCULATE(
+            COUNTROWS(FactAttrition),
+            FactAttrition[Attrition] = "Yes"
+        )
+)
+
+Summary_Gender =
+SUMMARIZE(
+    DimEmployee,
+    DimEmployee[Gender],
+    "AttritionCount",
+        CALCULATE(
+            COUNTROWS(FactAttrition),
+            FactAttrition[Attrition] = "Yes"
+        )
+)
+
+Summary_JobRole =
+SUMMARIZE(
+    DimEmployee,
+    DimEmployee[job_role],
+    "AttritionCount",
+        CALCULATE(
+            COUNTROWS(FactAttrition),
+            FactAttrition[Attrition] = "Yes"
+        )
+)

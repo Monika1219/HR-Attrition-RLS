@@ -1,0 +1,12 @@
+HR Role
+Full access
+No filters applied
+
+Manager Role
+Managers see only their team
+Filter: DimManager[ManagerEmail] = USERPRINCIPALNAME()
+
+Executive Role
+Executives see summary only
+Filter: FALSE() on DimEmployee
+Uses summary tables for aggregated reporting.
