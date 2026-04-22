@@ -1,34 +1,34 @@
-# HR Attrition Dashboard with Row Level Security (RLS)
+# HR Attrition Dashboard with Row-Level Security (RLS)
 
-## 📌 Overview
+## Overview
 This project demonstrates enterprise-level Power BI development including:
 
-- Star schema modelling
-- DAX measures
-- Row Level Security (RLS)
-- Executive summary reporting
-- Power BI Service governance
+- Star schema modelling  
+- DAX measures  
+- Row-Level Security (RLS)  
+- Executive summary reporting  
+- Power BI Service governance  
 
 Dataset: IBM HR Analytics Attrition Dataset (Kaggle)
 
 ---
 
-## 📂 Data Model
+## Data Model
 
 ### Tables
-- **DimEmployee** – employee attributes  
-- **DimDepartment** – unique department list  
-- **DimManager** – manager details + email  
-- **FactAttrition** – attrition facts  
-- **Summary tables** – aggregated views for Executive RLS  
+- DimEmployee � employee attributes  
+- DimDepartment � unique department list  
+- DimManager � manager details + email  
+- FactAttrition � attrition facts  
+- Summary tables � aggregated views for Executive RLS  
 
 ### Relationships
-- `DimEmployee[EmployeeID]` → `FactAttrition[EmployeeID]` (1:*)  
+- DimEmployee[EmployeeID] ? FactAttrition[EmployeeID] (1:*)  
 This is the core relationship driving the model.
 
 ---
 
-## 🧮 DAX Measures
+## DAX Measures
 - Attrition Count  
 - Headcount  
 - Attrition Rate  
@@ -36,52 +36,68 @@ This is the core relationship driving the model.
 - Attrition by Department  
 - Attrition by Manager  
 
-(Full DAX code included in `/Measures`)
+(Full DAX code included in /Measures)
 
 ---
 
-## 🔐 Row Level Security (RLS)
+## Row-Level Security (RLS)
 
-### HR Role
-- Full access  
-- No filters applied  
+### Role Definitions in Power BI Desktop
+Three RLS roles were created to simulate real organisational access levels:
 
-### Manager Role
-Managers see only their team  
-Filter:  
-`DimManager[ManagerEmail] = USERPRINCIPALNAME()`
+- **HR Role**  
+  Full access, no filters applied.
 
-### Executive Role
-Executives see summary only  
-Filter:  
-`FALSE()` on DimEmployee  
-Uses summary tables for aggregated reporting.
+- **Manager Role**  
+  Managers see only their own team.  
+  Filter:  
+  DimManager[ManagerEmail] = USERPRINCIPALNAME()
+
+- **Executive Role**  
+  Executives see only aggregated data.  
+  Filter:  
+  FALSE() on DimEmployee  
+  Summary tables provide the required aggregated reporting.
+
+### RLS Testing in Desktop
+Fake manager emails were added to the DimManager table to simulate different management groups.  
+These were used for testing via:  
+**Modeling ? View as ? Other user**
+
+This allowed validation of RLS behaviour without needing real accounts.
+
+### Deployment to Power BI Service
+Power BI Service only accepts **real tenant users** for RLS assignment.  
+Fake manager emails cannot be added because they do not exist in the Microsoft tenant.
+
+To validate RLS in the cloud:
+- My real account was assigned to the **Manager** role.  
+- RLS was tested using **View as** in the Service.  
+- Behaviour matched the Desktop RLS logic.
+
+### Summary
+- Fake emails were used for Desktop testing only.  
+- Real user assignment was used in the Service to demonstrate RLS functionality.  
+- This setup accurately reflects real-world RLS implementation while remaining suitable for a portfolio project.
 
 ---
 
-## 📊 Report Pages
-- Workforce Attrition Dashboard (Managers/Directors)
+## Report Pages
+- Workforce Attrition Dashboard (Managers/Directors)  
 - Executive Summary (Executives only)
 
 ---
 
-## ☁️ Power BI Service
+## Power BI Service
 - Published to workspace  
 - RLS roles created  
-- Users assigned  
+- Real user assigned to Manager role  
 - Tested using "View As"  
 - Added to App for distribution  
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 Include:
-- Data model  
-- RLS role setup  
-- View As (HR, Manager, Executive)  
 - Executive Summary page  
 - Manager/Director page  
-
----
-
-## 📁 Repository Structure
