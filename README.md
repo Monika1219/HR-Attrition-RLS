@@ -1,4 +1,4 @@
-# HR Attrition Dashboard with Row-Level Security (RLS)
+# HR Attrition Report with Row-Level Security (RLS)
 
 ## Overview
 This project demonstrates enterprise-level Power BI development including:
