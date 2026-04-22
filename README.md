@@ -23,7 +23,7 @@ Dataset: IBM HR Analytics Attrition Dataset (Kaggle)
 - Summary tables - aggregated views for Executive RLS  
 
 ### Relationships
-- DimEmployee[EmployeeID] ? FactAttrition[EmployeeID] (1:*)  
+- DimEmployee[EmployeeID] - FactAttrition[EmployeeID] (1:*)  
 This is the core relationship driving the model.
 
 ---
@@ -62,7 +62,7 @@ Three RLS roles were created to simulate real organisational access levels:
 ### RLS Testing in Desktop
 Fake manager emails were added to the DimManager table to simulate different management groups.  
 These were used for testing via:  
-**Modeling ? View as ? Other user**
+**Modeling - View as - Other user**
 
 This allowed validation of RLS behaviour without needing real accounts.
 
