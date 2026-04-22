@@ -16,11 +16,11 @@ Dataset: IBM HR Analytics Attrition Dataset (Kaggle)
 ## Data Model
 
 ### Tables
-- DimEmployee � employee attributes  
-- DimDepartment � unique department list  
-- DimManager � manager details + email  
-- FactAttrition � attrition facts  
-- Summary tables � aggregated views for Executive RLS  
+- DimEmployee - employee attributes  
+- DimDepartment - unique department list  
+- DimManager - manager details + email  
+- FactAttrition - attrition facts  
+- Summary tables - aggregated views for Executive RLS  
 
 ### Relationships
 - DimEmployee[EmployeeID] ? FactAttrition[EmployeeID] (1:*)  
@@ -90,9 +90,6 @@ To validate RLS in the cloud:
 
 ## Power BI Service
 - Published to workspace  
-- RLS roles created  
-- Real user assigned to Manager role  
-- Tested using "View As"  
 - Added to App for distribution  
 
 ---
